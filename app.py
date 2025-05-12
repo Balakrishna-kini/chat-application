@@ -5,15 +5,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-# Route for homepage
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Handle messages
 @socketio.on('message')
 def handle_message(msg):
-    print(f"Message: {msg}")
+    print('Message received: ' + msg)
     send(msg, broadcast=True)
 
 if __name__ == '__main__':
